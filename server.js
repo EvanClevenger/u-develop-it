@@ -7,7 +7,7 @@ const db = require('./db/connections')
 const mysql = require('mysql2'); //connecting to the MySQl datbase ny importing mysql12 package that we installed with node moduels.
 const { application } = require('express');
 
-const inputCheck = require('./u-develop-it/utils/inputCheck');
+const inputCheck = require('./utils/inputCheck');
 
 //Express middleware
 app.use(express.urlencoded({ extended: false}));
@@ -16,7 +16,11 @@ app.use(express.json());
 
 // Get all candidates usuing GET route
 app.get('/api/candidate', (req, res) => { //('api/candidates') is the endpoint in the bowser 
-    const sql = `SELECT * FROM candidates`;
+    const sql =  `SELECT candidates.*, parties.name 
+        AS party_name 
+        FROM candidates 
+        LEFT JOIN parties 
+        ON candidates.party_id = parties.id`;
   
     db.query(sql, (err, rows) => {
       if (err) {
@@ -33,7 +37,12 @@ app.get('/api/candidate', (req, res) => { //('api/candidates') is the endpoint i
 
 // GET a single candidate using GET route
 app.get('/api/candidate/:id', (req, res) =>{
-    const sql = `SELECT * FROM candidates WHERE id =?`;
+    const sql =  `SELECT candidates.*, parties.name 
+        AS party_name 
+        FROM candidates 
+        LEFT JOIN parties 
+        ON candidates.party_id = parties.id
+        WHERE candidates.id = ?`;
     const params = [req.params.id]; // able to specify what candidate we want by adding the id in the browser. 
 
     db.query(sql, params ,(err, row) => {

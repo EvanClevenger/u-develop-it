@@ -6,15 +6,15 @@ VALUES
 
 /* The parties will need to be created first, or the INSERT statements will fail due to the foreign key constraint we added to the candidates schema.*/
 
-INSERT INTO candidates (first_name, last_name, industry_connected)
+INSERT INTO candidates (first_name, last_name, party_id, industry_connected)
 VALUES
-  ('Ronald', 'Firbank', 1),
-  ('Virginia', 'Woolf', 1),
-  ('Piers', 'Gaveston', 0),
-  ('Charles', 'LeRoi', 1),
-  ('Katherine', 'Mansfield', 1),
-  ('Dora', 'Carrington', 0),
-  ('Edward', 'Bellamy', 0),
-  ('Montague', 'Summers', 1),
-  ('Octavia', 'Butler', 1),
-  ('Unica', 'Zurn', 1);
+  ('Ronald', 'Firbank', 1, 1),
+  ('Virginia', 'Woolf', 1,1),
+  ('Piers', 'Gaveston',1, 0),
+  ('Charles', 'LeRoi', 2,1),
+  ('Katherine', 'Mansfield',2,1),
+  ('Dora', 'Carrington', 3,0),
+  ('Edward', 'Bellamy', 3,0),
+  ('Montague', 'Summers', 3,1),
+  ('Octavia', 'Butler',3 ,1),
+  ('Unica', 'Zurn', NULL,1);
